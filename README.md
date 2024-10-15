@@ -1,5 +1,35 @@
-# Vue 3 + Vite
+# Candy Shop
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Установка и Запуск
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+### Необходимые требования
+
+Перед началом убедитесь, что у вас установлены следующие инструменты:
+
+- [Node.js](https://nodejs.org/) (рекомендуемая версия: 14.x или выше)
+- [npm](https://www.npmjs.com/) (входит в состав Node.js)
+
+### Установка
+
+1. Склонируйте репозиторий на свой компьютер:
+
+   ```bash
+   git clone <URL-репозитория>
+   ```
+
+2. Перейдите в каталог проекта: cd katalog-test
+   3.Установите необходимые зависимости:
+   ```bash
+   npm install
+   ```
+   ```bash
+   npm i vite
+   ```
+
+### Запуск приложения
+
+Чтобы запустить приложение в режиме разработки, используйте следующую команду:
+
+```bash
+ npm vite
+```
