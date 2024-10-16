@@ -5,7 +5,6 @@
         <h2>Корзина</h2>
         <button class="cart__btn-main" @click="closeCart">Закрыть</button>
       </div>
-
       <div v-if="cartItems.length === 0">Корзина пуста</div>
       <ul class="cart__ul">
         <li v-for="item in cartItems" :key="item.id" class="cart__item">
@@ -43,7 +42,7 @@
 
 <script setup>
 import { ref, computed, onBeforeUnmount } from "vue";
-import { getCart } from "@/services/cart"; // Импортируем функцию для получения корзины
+import { getCart } from "@/services/cart";
 
 const props = defineProps({
   isOpen: {
@@ -56,8 +55,10 @@ const props = defineProps({
   },
 });
 
-const cartItems = ref(getCart()); // Получаем товары из корзины
+// Получаем товары из корзины
+const cartItems = ref(getCart());
 
+//Получаем сумму товаров
 const totalCost = computed(() => {
   return cartItems.value.reduce(
     (total, item) => total + item.cost * item.quantity,
@@ -73,7 +74,7 @@ const updateCart = () => {
 // Слушаем событие обновления корзины
 window.addEventListener("cartUpdated", updateCart);
 
-// Функция для увеличения количества товара
+// Функции для увеличения/уменьшения количества товара
 const increaseQuantity = (id) => {
   const item = cartItems.value.find((item) => item.id === id);
   if (item) {
@@ -83,8 +84,6 @@ const increaseQuantity = (id) => {
     window.dispatchEvent(new Event("cartUpdated"));
   }
 };
-
-// Функция для уменьшения количества товара
 const decreaseQuantity = (id) => {
   const item = cartItems.value.find((item) => item.id === id);
   if (item) {
@@ -104,7 +103,6 @@ const removeFromCart = (id) => {
   cartItems.value = cartItems.value.filter((item) => item.id !== id);
   updateLocalStorage();
 
-  // Генерируем событие обновления корзины
   window.dispatchEvent(new Event("cartUpdated"));
 };
 

@@ -34,7 +34,7 @@
   transition: stroke 0.3s linear;
   display: block;
   fill: transparent;
-  stroke: var(--cornflower-blue);
+  stroke: green;
   stroke-linecap: round;
   stroke-dasharray: 283;
   stroke-dashoffset: 280;

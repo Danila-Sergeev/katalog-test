@@ -10,7 +10,6 @@ export const addToCart = (product) => {
 
   localStorage.setItem("cart", JSON.stringify(cart));
 
-  // Генерируем событие о обновлении корзины
   window.dispatchEvent(new Event("cartUpdated"));
 };
 

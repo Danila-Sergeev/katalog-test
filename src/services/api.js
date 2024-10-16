@@ -14,7 +14,6 @@ export async function fetchProducts(page = 1, limit = 10) {
 
     return data.products;
   } catch (error) {
-    // Обработка ошибок
     console.error("Ошибка при получении товаров:", error);
     return [];
   }

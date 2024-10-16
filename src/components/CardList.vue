@@ -7,7 +7,7 @@
       class="card-list__search-input"
     />
     <div class="card-list__card">
-      <SpinnerMain v-if="isLoading" />
+      <SpinnerMain class="card-list__spinner" v-if="isLoading" />
       <Card
         v-else
         v-for="product in filteredProducts"
@@ -28,6 +28,7 @@ const products = ref([]);
 const isLoading = ref(true);
 const searchQuery = ref("");
 
+//Подгружаем данные с сервера
 onMounted(async () => {
   try {
     products.value = await fetchProducts();
@@ -38,6 +39,7 @@ onMounted(async () => {
   }
 });
 
+//Функция фильтрации
 const filteredProducts = computed(() => {
   if (!searchQuery.value) {
     return products.value;
@@ -53,7 +55,7 @@ const filteredProducts = computed(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .card-list__search-input {
@@ -63,13 +65,12 @@ const filteredProducts = computed(() => {
   border: 1px solid #ccc;
   border-radius: 25px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   outline: none;
   transition: box-shadow 0.3s ease-in-out;
   background-color: inherit;
   color: black;
 }
-
 .card-list__search-input:focus {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   border-color: #4caf50;
@@ -80,6 +81,10 @@ const filteredProducts = computed(() => {
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+}
+.card-list__spinner {
+  width: 50px;
+  color: #4caf50;
 }
 @media (max-width: 420px) {
   .card-list__search-input {

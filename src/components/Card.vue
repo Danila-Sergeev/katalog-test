@@ -1,14 +1,23 @@
 <template>
-  <div class="card__box">
+  <div class="card__box" @click="openPopup(product)">
     <img :src="product.image" :alt="product.title" class="card__img" />
     <div class="card__title">{{ product.title }}</div>
     <div class="card__cost">{{ product.cost }} ₽</div>
-    <button class="card__btn" @click="addItemToCart">Добавить в корзину</button>
+    <button class="card__btn" @click.stop="addItemToCart">
+      Добавить в корзину
+    </button>
   </div>
+  <ProductPopup
+    v-if="isPopupOpen"
+    :product="selectedProduct"
+    @close="closePopup"
+  />
 </template>
 
 <script setup>
 import { addToCart } from "@/services/cart";
+import ProductPopup from "./ProductPopup.vue";
+import { ref } from "vue";
 
 const props = defineProps({
   product: {
@@ -17,8 +26,23 @@ const props = defineProps({
   },
 });
 
+const isPopupOpen = ref(false);
+const selectedProduct = ref(null);
+
+//функции открытия/закрытия попапа
+const openPopup = (product) => {
+  selectedProduct.value = product;
+  isPopupOpen.value = true;
+};
+const closePopup = () => {
+  isPopupOpen.value = false;
+};
+
+//Добавление товара в корзину
 const addItemToCart = () => {
-  addToCart(props.product); // Добавляем текущий продукт в корзину
+  isPopupOpen.value = false;
+  addToCart(props.product);
+  isPopupOpen.value = false;
 };
 </script>
 <style>
@@ -33,6 +57,7 @@ const addItemToCart = () => {
   align-items: center;
   padding: 20px;
   justify-content: space-between;
+  cursor: pointer;
 }
 .card__img {
   max-width: 200px;
